@@ -21,12 +21,14 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'tpope/vim-commentary'
     Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
     Plug 'mdempsky/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
+    Plug 'arnaud-lb/vim-php-namespace'
+    Plug 'StanAngeloff/php.vim'
 
 call plug#end()
 
 colorscheme gruvbox
 map <silent> <C-n> :NERDTreeToggle<CR>
-nmap <Leader>r :NERDTreeFocus<cr>R<c-w><c-p>
+map <silent> <C-r> :NERDTreeFocus <CR>
 let mapleader = "\<Space>"
 
 filetype plugin indent on 	"required
@@ -48,8 +50,13 @@ set smartcase
 set hlsearch
 set noerrorbells
 set tabstop=4 softtabstop=4
+set shiftwidth=4
+set expandtab
 set expandtab
 set smartindent
+set showmatch " Shows matching brackets
+set ruler " Always shows location in file (line#)
+set smarttab " Autotabs for certain code
 
 "------------------------------------------------
 " persist START
@@ -248,5 +255,17 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 
 " tab
-let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#enabled = 1
+:nnoremap <c-t> :bn <CR>
+:nnoremap <c-d> :bdelete <CR>
+
+" PHP
+function! IPhpExpandClass()
+    call PhpExpandClass()
+    call feedkeys('a', 'n')
+endfunction
+
+autocmd FileType php inoremap <Leader>n <Esc>:call IPhpExpandClass()<CR>
+autocmd FileType php noremap <Leader>n :call PhpExpandClass()<CR>
+
 
