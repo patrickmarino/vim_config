@@ -23,6 +23,7 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'mdempsky/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
     Plug 'arnaud-lb/vim-php-namespace'
     Plug 'StanAngeloff/php.vim'
+    Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
 call plug#end()
 
